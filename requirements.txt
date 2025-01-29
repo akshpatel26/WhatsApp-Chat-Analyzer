@@ -7,3 +7,4 @@ pandas
 emoji
 numpy 
 scikit-learn
+textblob 
