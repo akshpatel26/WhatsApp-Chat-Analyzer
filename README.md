@@ -13,31 +13,17 @@ Whatsapp has quickly become the world’s most popular text and voice messaging 
 ### Beginning. How do I export my conversations? From Where To Obtain Data?
 
 
-- The first step is **Data Retrieval & Preprocessing**, that is to **gather the data**. WhatsApp allows you to **export your chats** through a **.txt format**. 
-
-- Go to the respective chat, which you want to export!
-![whatsapp-options](https://github.com/user-attachments/assets/5d8dcb1a-57f4-4f53-ae8d-c95649d459e9)
-
-
+- The first step is **Data Retrieval & Preprocessing**, that is to **gather the data**. WhatsApp allows you to **export your chats** through a **.txt format**.
   
-
-
 - Tap on **options**, click on **More**, and **Export Chat.**
 
-    ![whatsapp-export-chat](https://github.com/user-attachments/assets/fc445a2a-49c3-4b1e-bdcb-4a2a18765a27)
-
-
 - I will be Exporting **Without Media.**
-![whatsapp-media](https://github.com/user-attachments/assets/112ca3d4-96ec-486b-9d2c-7a83699f2e15)
 
 
 #### NOTE:
 - Without media: exports about **40k messages **
 - While exporting data, *avoid including media files* because if the number of media files is greater than certain figure then not all the media files are exported.
 
-### Opening this .txt file up, you get messages in a format that looks like this:
-
-![textfile](https://github.com/user-attachments/assets/f85e0f72-e093-465a-ab5a-da103e4a913c)
 
 
 ### *Preparation and reading data*
@@ -116,6 +102,15 @@ The dataset now contains 3 columns - DateTime String, User, and Message sent and
 Now that we have a clean DataFrame to work with, it’s time to perform analysis on it. **Let’s start Visualizing!**
 
 
+# *Run locally*
+Create new project in pycharm and add above files. After that open terminal and run the following command. This will install all the modules needed to run this app.
+```bash
+pip install -r requirements.txt
+```
+To run the app, type following command in terminal.
+```bash
+streamlit run app.py
+```
 
 
 # *Exploratory Data Analysis*
