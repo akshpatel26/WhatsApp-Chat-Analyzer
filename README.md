@@ -112,6 +112,10 @@ To run the app, type following command in terminal.
 streamlit run app.py
 ```
 
+# *Live Demo*
+
+https://whatsapp-chat-analyzer-by-aksh-patel.streamlit.app/
+
 
 # *Exploratory Data Analysis*
 
