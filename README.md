@@ -16,20 +16,20 @@ Whatsapp has quickly become the world’s most popular text and voice messaging 
 - The first step is **Data Retrieval & Preprocessing**, that is to **gather the data**. WhatsApp allows you to **export your chats** through a **.txt format**. 
 
 - Go to the respective chat, which you want to export!
+![whatsapp-options](https://github.com/user-attachments/assets/5d8dcb1a-57f4-4f53-ae8d-c95649d459e9)
 
 
-    ![whatsapp-options](https://github.com/user-attachments/assets/ce25190f-9f80-4be7-bceb-d6fad64da60d)
+  
 
 
 - Tap on **options**, click on **More**, and **Export Chat.**
 
-      ![whatsapp-export-chat](https://github.com/user-attachments/assets/606e6e26-900d-43a1-8551-81f63190026e)
+    ![whatsapp-export-chat](https://github.com/user-attachments/assets/fc445a2a-49c3-4b1e-bdcb-4a2a18765a27)
 
 
 - I will be Exporting **Without Media.**
+![whatsapp-media](https://github.com/user-attachments/assets/112ca3d4-96ec-486b-9d2c-7a83699f2e15)
 
-       
-![whatsapp-media](https://github.com/user-attachments/assets/124a8f3b-a3de-477b-9be2-63c764f7afae)
 
 #### NOTE:
 - Without media: exports about **40k messages **
@@ -37,8 +37,7 @@ Whatsapp has quickly become the world’s most popular text and voice messaging 
 
 ### Opening this .txt file up, you get messages in a format that looks like this:
 
-
-![textfile](https://github.com/user-attachments/assets/d5244a16-0e42-4eb8-98f5-c566853aadd7)
+![textfile](https://github.com/user-attachments/assets/f85e0f72-e093-465a-ab5a-da103e4a913c)
 
 
 ### *Preparation and reading data*
