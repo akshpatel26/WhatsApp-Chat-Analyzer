@@ -206,21 +206,6 @@ def analyze_message_patterns(df, selected_user='Overall'):
     if len(text_messages) > 10:  # Only cluster if we have enough messages
         tfidf_matrix = vectorizer.fit_transform(text_messages)
 
-        # Determine optimal number of clusters (max 5)
-        n_clusters = min(5, len(text_messages) // 10)
-
-        kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-        cluster_labels = kmeans.fit_predict(tfidf_matrix)
-
-        # Get top terms for each cluster
-        cluster_terms = {}
-        feature_names = vectorizer.get_feature_names_out()
-        for i in range(n_clusters):
-            center_indices = kmeans.cluster_centers_[i].argsort()[::-1][:5]
-            cluster_terms[i] = [feature_names[idx] for idx in center_indices]
-    else:
-        cluster_terms = {}
-
     # Sentiment analysis
     def get_sentiment(text):
         try:
@@ -243,7 +228,6 @@ def analyze_message_patterns(df, selected_user='Overall'):
         'timing_patterns': timing_patterns.to_dict(),
         'avg_message_length': avg_message_length,
         'avg_words_per_message': avg_words_per_message,
-        'message_clusters': cluster_terms,
         'sentiment_stats': {
             'positive': (df['sentiment'] > 0.2).sum(),
             'neutral': ((df['sentiment'] >= -0.2) & (df['sentiment'] <= 0.2)).sum(),
@@ -273,7 +257,7 @@ def create_pattern_visualizations(pattern_results, df):
 
     # 2. Sentiment Distribution
     fig2, ax2 = plt.subplots(figsize=(8, 8))
-    c = ["#B2456E", "#f4c4bb", "#552619"]
+    c = ["#DAD7CD", "#A3B18A", "#588157"]
     sentiment_data = pd.Series(pattern_results['sentiment_stats'])
     ax2.pie(sentiment_data, labels=sentiment_data.index, autopct='%1.1f%%', colors=c)
     ax2.set_title('Message Sentiment Distribution')

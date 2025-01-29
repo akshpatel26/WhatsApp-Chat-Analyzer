@@ -228,31 +228,6 @@ if uploaded_file is not None:
         except Exception as e:
             st.error(f"Error in advanced analytics: {str(e)}")
 
-        # with st.expander("Message Pattern Analysis", expanded=False):
-        #     try:
-        #         # Get pattern analysis results
-        #         pattern_results = helper.analyze_message_patterns(df, selected_user)
-
-        #         # Display basic statistics
-        #         st.subheader("Message Pattern Statistics")
-        #         col1, col2 = st.columns(2)
-
-        #         with col1:
-        #             st.metric("Average Message Length",
-        #                      f"{pattern_results['avg_message_length']:.1f} characters")
-        #         with col2:
-        #             st.metric("Average Words per Message",
-        #                      f"{pattern_results['avg_words_per_message']:.1f} words")
-
-        #         # Display visualizations
-        #         st.subheader("Pattern Visualizations")
-        #         figs = helper.create_pattern_visualizations(pattern_results, df)
-
-        #         # Show timing distribution
-        #         if 'timing' in figs:
-        #             st.subheader("Message Timing Patterns")
-        #             st.pyplot(figs['timing'])
-
         # Show sentiment distribution
         if 'sentiment' in figs:
             st.subheader("Message Sentiment Distribution")
@@ -263,10 +238,5 @@ if uploaded_file is not None:
             st.subheader("Top User Interactions")
             st.pyplot(figs['interactions'])
 
-        # Display message clusters
-        if pattern_results['message_clusters']:
-            st.subheader("Message Content Clusters")
-            for cluster_id, terms in pattern_results['message_clusters'].items():
-                st.write(f"Cluster {cluster_id + 1}: {', '.join(terms)}")
 
 

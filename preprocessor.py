@@ -12,8 +12,7 @@ def preprocess(data):
     # Regex patterns for both 12-hour and 24-hour formats
     patterns = {
         # 12-hour formats
-        '12h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)',
-        # [DD/MM/YY, HH:MM:SS AM/PM]
+        '12h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)', # [DD/MM/YY, HH:MM:SS AM/PM]
         '12h_2': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',  # DD/MM/YYYY, HH:MM AM/PM
         '12h_3': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s([\+0-9\s]+)\s(.*)',  # System messages 12h
 
