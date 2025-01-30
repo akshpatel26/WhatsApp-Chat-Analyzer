@@ -14,15 +14,28 @@ Whatsapp has quickly become the world’s most popular text and voice messaging 
 
 
 - The first step is **Data Retrieval & Preprocessing**, that is to **gather the data**. WhatsApp allows you to **export your chats** through a **.txt format**.
-  
+
+<p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.05_3533808e.jpg" width=150 align="center">
+</p>
+
 - Tap on **options**, click on **More**, and **Export Chat.**
+ <p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.10_3a6ca252.jpg" width=150 align="center">
+</p>
 
 - I will be Exporting **Without Media.**
-
+ <p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.10_412109b8.jpg" width=250 align="center">
+</p>
 
 #### NOTE:
 - Without media: exports about **40k messages **
 - While exporting data, *avoid including media files* because if the number of media files is greater than certain figure then not all the media files are exported.
+  
+### Opening this .txt file up, you get messages in a format that looks like this:
+
+<img src="extras/textfile.png" align="center">
 
 
 
