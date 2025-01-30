@@ -103,7 +103,7 @@ Now that we have a clean DataFrame to work with, it’s time to perform analysis
 
 
 # *Run locally*
-Create new project in pycharm and add above files. After that open terminal and run the following command. This will install all the modules needed to run this app.
+Install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
