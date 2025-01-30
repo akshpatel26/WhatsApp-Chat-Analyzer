@@ -4,6 +4,8 @@ import re
 from collections import Counter
 from wordcloud import WordCloud
 from urlextract import URLExtract
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 def fetch_stats(selected_user, df):
@@ -167,14 +169,13 @@ def get_peak_activity_hours(selected_user, df):
     return peak_hours
 
 
+
 # Add these functions to helper.py
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import StandardScaler
-import numpy as np
 from textblob import TextBlob
-import pandas as pd
 from collections import defaultdict
 
 
@@ -241,8 +242,6 @@ def analyze_message_patterns(df, selected_user='Overall'):
 
 def create_pattern_visualizations(pattern_results, df):
     """Create visualizations for message patterns"""
-    import matplotlib.pyplot as plt
-    import seaborn as sns
 
     # Create figures dictionary
     figs = {}
