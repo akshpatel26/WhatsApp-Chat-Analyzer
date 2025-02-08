@@ -7,7 +7,19 @@ from urlextract import URLExtract
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
+def create_pattern_visualizations(pattern_results, df):
+    # Remove NaN values before creating pie chart
+    sentiment_data = pattern_results['sentiment_counts'].dropna()
+    
+    # Only create pie chart if there are non-zero values
+    if len(sentiment_data) > 0:
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(12, 6))
+        
+        # Rest of your existing visualization code
+        ax2.pie(sentiment_data, labels=sentiment_data.index, autopct='%1.1f%%', colors=c)
+    else:
+        print("No valid sentiment data to visualize")
+        
 def fetch_stats(selected_user, df):
     if selected_user != 'Overall':
         df = df[df['user'] == selected_user]

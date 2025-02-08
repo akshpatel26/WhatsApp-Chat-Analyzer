@@ -1,33 +1,31 @@
 import pandas as pd
 import re
 
-
 def preprocess(data):
     # Split the data into lines
     lines = data.split('\n')
-
+    
     # Create a list to hold the processed messages
     messages = []
-
-    # Regex patterns for both 12-hour and 24-hour formats
+    
+    # Regex patterns for multiple timestamp formats
     patterns = {
-        # 12-hour formats
-        '12h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)', # [DD/MM/YY, HH:MM:SS AM/PM]
-        '12h_2': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',  # DD/MM/YYYY, HH:MM AM/PM
-        '12h_3': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s([\+0-9\s]+)\s(.*)',  # System messages 12h
-
+        '12h_standard': r'(\d{2}/\d{2}/\d{2},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',
+        '12h_bracketed': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)',
+        '12h_extended': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',
+        
         # 24-hour formats
-        '24h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2})\]\s(.*?):\s(.*)',  # [DD/MM/YY, HH:MM:SS]
-        '24h_2': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)',  # DD/MM/YYYY, HH:MM
-        '24h_3': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s([\+0-9\s]+)\s(.*)'  # System messages 24h
+        '24h_standard': r'(\d{2}/\d{2}/\d{2},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)',
+        '24h_bracketed': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2})\]\s(.*?):\s(.*)',
+        '24h_extended': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)'
     }
-
+    
     for line in lines:
-        if not line.strip():
+        line = line.strip()
+        if not line:
             continue
-
+        
         matched = False
-        # Try all patterns
         for pattern in patterns.values():
             match = re.match(pattern, line)
             if match:
@@ -35,52 +33,55 @@ def preprocess(data):
                 messages.append([date_time, user.strip(), message.strip()])
                 matched = True
                 break
-
-        if not matched:
-            # Check if this is a continued message from previous line
-            if messages and line.strip():
-                messages[-1][2] += '\n' + line.strip()
-
+        
+        # Handle continued messages
+        if not matched and messages:
+            messages[-1][2] += '\n' + line.strip()
+    
     # Create DataFrame
     df = pd.DataFrame(messages, columns=['date', 'user', 'message'])
-
-    # Convert the 'message' column to string type
-    df['message'] = df['message'].astype(str)
-
-    # Try both 12-hour and 24-hour format conversions
+    
+    # Convert dates with multiple format attempts
+    date_formats = [
+        '%d/%m/%y, %I:%M %p',
+        '%d/%m/%y, %I:%M:%S %p',
+        '%d/%m/%Y, %I:%M %p',
+        '%d/%m/%y, %H:%M',
+        '%d/%m/%y, %H:%M:%S',
+        '%d/%m/%Y, %H:%M'
+    ]
+    
+    # Function to try multiple datetime conversions
     def convert_datetime(date_series):
-        # Try 12-hour formats first
-        datetime_12h = pd.to_datetime(date_series, format='%d/%m/%Y, %I:%M %p', errors='coerce')
-        datetime_12h_sec = pd.to_datetime(date_series, format='%d/%m/%y, %I:%M:%S %p', errors='coerce')
-
-        # Try 24-hour formats
-        datetime_24h = pd.to_datetime(date_series, format='%d/%m/%Y, %H:%M', errors='coerce')
-        datetime_24h_sec = pd.to_datetime(date_series, format='%d/%m/%y, %H:%M:%S', errors='coerce')
-
-        # Combine results, taking the first non-NaT value for each row
-        result = datetime_12h.combine_first(datetime_12h_sec) \
-            .combine_first(datetime_24h) \
-            .combine_first(datetime_24h_sec)
-
-        return result
-
-    # Convert dates and handle both formats
-    df['date'] = convert_datetime(df['date'].str.strip('[]'))
-
-    # Drop rows where date conversion failed
+        for fmt in date_formats:
+            try:
+                converted = pd.to_datetime(date_series, format=fmt)
+                if not converted.empty:
+                    return converted
+            except:
+                continue
+        return pd.to_datetime(date_series, errors='coerce')
+    
+    # Convert dates
+    df['date'] = convert_datetime(df['date'])
+    
+    # Handle potential conversion failures
     df = df.dropna(subset=['date'])
-
-    # Extract additional features
-    df['only_date'] = df['date'].dt.date
-    df['year'] = df['date'].dt.year
-    df['month'] = df['date'].dt.month_name()
-    df['month_num'] = df['date'].dt.month
-    df['day'] = df['date'].dt.day
-    df['day_name'] = df['date'].dt.day_name()
-    df['hour'] = df['date'].dt.hour
-    df['minute'] = df['date'].dt.minute
-    df['second'] = df['date'].dt.second
-
+    
+    # Extract datetime features safely
+    if not df.empty:
+        df['only_date'] = df['date'].dt.date
+        df['year'] = df['date'].dt.year
+        df['month'] = df['date'].dt.month_name()
+        df['month_num'] = df['date'].dt.month
+        df['day'] = df['date'].dt.day
+        df['day_name'] = df['date'].dt.day_name()
+        df['hour'] = df['date'].dt.hour
+        df['minute'] = df['date'].dt.minute
+    
+    # Optional: Handle media and system messages
+    df['is_media'] = df['message'].str.contains('<Media omitted>', case=False)
+    
     print(f"Total messages processed: {len(df)}")
-
+    
     return df
