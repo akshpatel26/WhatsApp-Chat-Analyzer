@@ -14,15 +14,28 @@ Whatsapp has quickly become the world’s most popular text and voice messaging 
 
 
 - The first step is **Data Retrieval & Preprocessing**, that is to **gather the data**. WhatsApp allows you to **export your chats** through a **.txt format**.
-  
+
+<p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.05_3533808e.jpg" width=150 align="center">
+</p>
+
 - Tap on **options**, click on **More**, and **Export Chat.**
+ <p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.10_3a6ca252.jpg" width=150 align="center">
+</p>
 
 - I will be Exporting **Without Media.**
-
+ <p align="center">
+<img src="extras/WhatsApp Image 2025-01-30 at 20.43.10_412109b8.jpg" width=250 align="center">
+</p>
 
 #### NOTE:
 - Without media: exports about **40k messages **
 - While exporting data, *avoid including media files* because if the number of media files is greater than certain figure then not all the media files are exported.
+  
+### Opening this .txt file up, you get messages in a format that looks like this:
+
+<img src="extras/textfile.png" align="center">
 
 
 
@@ -127,48 +140,53 @@ https://whatsapp-chat-analyzer-by-aksh-patel.streamlit.app/
 # *Exploratory Data Analysis*
 
 
-
-![Screenshot 2025-01-29 204644](https://github.com/user-attachments/assets/9b29b8b4-84b9-42c3-8a60-ba85530134ef)
-
-
-![Screenshot 2025-01-29 204832](https://github.com/user-attachments/assets/ca71c05d-4df4-4ecd-be03-85ed19e0d7c6)
+![Screenshot 2025-01-31 183110](https://github.com/user-attachments/assets/50efad68-10ad-4356-ad7e-c76225149a4f)
 
 
-
-![Screenshot 2025-01-29 210635](https://github.com/user-attachments/assets/d2694db1-f051-4da7-8e49-0ec0d8c64714)
-
-
-![Screen![Screenshot 2025-01-29 210635](https://github.com/user-attachments/assets/2133e667-cdc9-4134-98a9-d774c2ebfaec)
-shot 2025-01-29 210104](https://github.com/user-attachments/assets/bcd07ca1-b0ec-4e12-a458-355e842d29ba)
+![Screenshot 2025-01-31 185213](https://github.com/user-attachments/assets/65d19de9-f6f5-42e4-86b3-61fffefe2862)
 
 
-![Screenshot 2025-01-29 204917](https://github.com/user-attachments/assets/004749d1-fde6-414c-94f0-23a09f822f1f)
+![Screenshot 2025-01-31 185049](https://github.com/user-attachments/assets/88124fe6-1cc7-4da4-a1cc-d66daa11a529)
 
 
 
-![Screenshot 2025-01-29 204952](https://github.com/user-attachments/assets/3fcfd7e7-fa39-4a4b-bbda-c805fb368c7e)
+![Screenshot 2025-01-31 185238](https://github.com/user-attachments/assets/322f20b5-e0cb-4236-be5a-8f51be7df4d5)
+
+
+
+![Screenshot 2025-01-31 185427](https://github.com/user-attachments/assets/2acf1ca3-315f-49ac-9a9a-9220559361a0)
+
+
+![Screenshot 2025-01-31 185437](https://github.com/user-attachments/assets/7ee4d9b4-ca74-4068-9207-7bd4f3aa010c)
 
 
 
 
-
-![Screenshot 2025-01-29 210649](https://github.com/user-attachments/assets/29909083-f75f-4028-a414-95bbc9a05ce8)
-
-
-
-![Screenshot 2025-01-29 210720](https://github.com/user-attachments/assets/29eafdd5-2ce3-4ab1-8f42-cd9b1165858a)
-
-![Screenshot 2025-01-29 210422](https://github.com/user-attachments/assets/de37b88c-25fc-49cd-8dab-9798a53a2b32)
-
-
-![Screenshot 2025-01-29 210449](https://github.com/user-attachments/assets/485463d6-2767-44d7-8d26-f7ebe21561f3)
-
-![Screenshot 20![Screenshot 2025-01-29 210501](https://github.com/user-attachments/assets/ad04f186-815d-43ab-9a36-bd51aabdb485)
-25-01-29 210720](https://github.com/user-attachments/assets/f485852c-8310-429f-9806-4acd1ed2f066)
-
-
-![Screenshot 2025-01-29 210408](https://github.com/user-attachments/assets/2735c8dd-52e0-47dd-994e-d8440e1ee4fe)
+![Screenshot 2025-01-31 185448](https://github.com/user-attachments/assets/6724b024-358a-4587-81e7-875d252dd31a)
 
 
 
-![Screenshot 2025-01-29 210501](https://github.com/user-attachments/assets/728d5277-6a26-4883-b578-43b2751b90c6)
+![Screenshot 2025-01-31 200555](https://github.com/user-attachments/assets/2cc82d62-06f3-4ee6-b206-922d30dfee77)
+
+
+![Screenshot 2025-01-31 185500](https://github.com/user-attachments/assets/417656b8-1f95-4bb4-aced-ce0eb02a3277)
+
+
+![Screenshot 2025-01-31 185521](https://github.com/user-attachments/assets/4ed95080-ce8b-4b54-a7a7-3b7f632481ad)
+
+![Screenshot 2025-01-31 185536](https://github.com/user-attachments/assets/c2f73e94-1897-4fda-8eee-e8c62036db89)
+
+
+![Screenshot 2025-01-31 201041](https://github.com/user-attachments/assets/df53effa-96be-453f-9176-e76fa52b1734)
+
+
+
+![Screenshot 2025-01-31 185542](https://github.com/user-attachments/assets/122f10f4-cbb3-41ed-a228-dd7132fc04a7)
+
+
+
+
+
+![Screenshot 2025-01-31 185509](https://github.com/user-attachments/assets/b99202e9-92e7-4142-8bfa-03b65a706527)
+
+
