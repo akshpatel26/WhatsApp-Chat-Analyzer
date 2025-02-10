@@ -48,7 +48,7 @@ if uploaded_file is not None:
     user_list.sort()
     user_list.insert(0, "Overall")
 
-    selected_user = st.sidebar.selectbox("Show analysis wrt", user_list)
+    selected_user = st.sidebar.selectbox("Show analysis ", user_list)
 
     if st.sidebar.button("Show Analysis"):
         # Fetch all statistics
