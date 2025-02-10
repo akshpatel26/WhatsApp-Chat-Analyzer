@@ -184,9 +184,9 @@ def get_peak_activity_hours(selected_user, df):
 
 # Add these functions to helper.py
 
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import KMeans
-from sklearn.preprocessing import StandardScaler
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# from sklearn.cluster import KMeans
+# from sklearn.preprocessing import StandardScaler
 from textblob import TextBlob
 from collections import defaultdict
 
@@ -209,15 +209,6 @@ def analyze_message_patterns(df, selected_user='Overall'):
     timing_patterns = df['hour_category'].value_counts()
     avg_message_length = df['message_length'].mean()
     avg_words_per_message = df['word_count'].mean()
-
-    # Message content clustering
-    vectorizer = TfidfVectorizer(max_features=100, stop_words='english')
-
-    # Filter out media messages and ensure messages are strings
-    text_messages = df[~df['message'].str.contains('<media omitted>', case=False, na=False)]['message'].astype(str)
-
-    if len(text_messages) > 10:  # Only cluster if we have enough messages
-        tfidf_matrix = vectorizer.fit_transform(text_messages)
 
     # Sentiment analysis
     def get_sentiment(text):
