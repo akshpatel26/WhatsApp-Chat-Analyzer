@@ -46,33 +46,31 @@ Since WhatsApp texts are multi-line, you cannot just read the file line by line 
 While reading each line, I split it based on a comma and take the first item returned from the `split()` function. If the line is a new message, the first item would be a valid date, and it will be appended as a new message to the list of messages. If it’s not, the message is part of the previous message, and hence, will be appended to the end of the previous message as one continuous message.
 
 ```bash
-
 def preprocess(data):
     # Split the data into lines
     lines = data.split('\n')
-
+    
     # Create a list to hold the processed messages
     messages = []
-
-    # Regex patterns for both 12-hour and 24-hour formats
+    
+    # Regex patterns for multiple timestamp formats
     patterns = {
-        # 12-hour formats
-        '12h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)', # [DD/MM/YY, HH:MM:SS AM/PM]
-        '12h_2': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',  # DD/MM/YYYY, HH:MM AM/PM
-        '12h_3': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s([\+0-9\s]+)\s(.*)',  # System messages 12h
-
+        '12h_standard': r'(\d{2}/\d{2}/\d{2},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',
+        '12h_bracketed': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2}\s[APMapm]{2})\]\s(.*?):\s(.*)',
+        '12h_extended': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2}\s[APMapm]{2})\s-\s(.*?):\s?(.*)',
+        
         # 24-hour formats
-        '24h_1': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2})\]\s(.*?):\s(.*)',  # [DD/MM/YY, HH:MM:SS]
-        '24h_2': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)',  # DD/MM/YYYY, HH:MM
-        '24h_3': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s([\+0-9\s]+)\s(.*)'  # System messages 24h
+        '24h_standard': r'(\d{2}/\d{2}/\d{2},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)',
+        '24h_bracketed': r'\[(\d{2}/\d{2}/\d{2},\s\d{2}:\d{2}:\d{2})\]\s(.*?):\s(.*)',
+        '24h_extended': r'(\d{2}/\d{2}/\d{4},\s\d{1,2}:\d{2})\s-\s(.*?):\s?(.*)'
     }
-
+    
     for line in lines:
-        if not line.strip():
+        line = line.strip()
+        if not line:
             continue
-
+        
         matched = False
-        # Try all patterns
         for pattern in patterns.values():
             match = re.match(pattern, line)
             if match:
@@ -80,12 +78,10 @@ def preprocess(data):
                 messages.append([date_time, user.strip(), message.strip()])
                 matched = True
                 break
-
-        if not matched:
-            # Check if this is a continued message from previous line
-            if messages and line.strip():
-                messages[-1][2] += '\n' + line.strip()
-   
+        
+        # Handle continued messages
+        if not matched and messages:
+            messages[-1][2] += '\n' + line.strip()
 ```
 
 
@@ -128,7 +124,6 @@ streamlit run app.py
 # *Live Demo*
 
 https://whatsapp-chat-analyzer-by-aksh-patel.streamlit.app/
-
 
 #  *Limitation of Project*
 
