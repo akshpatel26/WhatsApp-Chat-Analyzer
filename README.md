@@ -125,7 +125,6 @@ streamlit run app.py
 
 https://whatsapp-chat-analyzer-by-aksh-patel.streamlit.app/
 
-
 #  *Limitation of Project*
 
 - Maximum file size to be uploaded is 200MB.
